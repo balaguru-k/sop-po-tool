@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chunked File Upload</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .progress-container {
+            margin-top: 20px;
+            display: none;
+        }
+        .progress {
+            width: 100%;
+            background-color: #f3f3f3;
+            border-radius: 3px;
+        }
+        .progress-bar {
+            height: 20px;
+            background-color: #4CAF50;
+            width: 0%;
+            border-radius: 3px;
+            text-align: center;
+            line-height: 20px;
+            color: white;
+        }
+        .status {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Chunked File Upload</h1>
+        <div>
+            <input type="file" id="fileInput" />
+            <button id="uploadButton">Upload</button>
+        </div>
+        
+        <div class="progress-container" id="progressContainer">
+            <h3>Upload Progress</h3>
+            <div class="progress">
+                <div class="progress-bar" id="progressBar">0%</div>
+            </div>
+            <div class="status" id="status">Ready to upload</div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('fileInput');
+            const uploadButton = document.getElementById('uploadButton');
+            const progressContainer = document.getElementById('progressContainer');
+            const progressBar = document.getElementById('progressBar');
+            const statusText = document.getElementById('status');
+            
+            const CHUNK_SIZE = 1024 * 1024 * 10; // 1MB per chunk
+            
+            uploadButton.addEventListener('click', function() {
+                const file = fileInput.files[0];
+                if (!file) {
+                    alert('Please select a file first');
+                    return;
+                }
+                
+                progressContainer.style.display = 'block';
+                uploadFileInChunks(file);
+            });
+            
+            function uploadFileInChunks(file) {
+                const totalChunks = Math.ceil(file.size / CHUNK_SIZE);
+                let uploadedChunks = 0;
+                let start = 0;
+                
+                statusText.textContent = `Preparing to upload ${file.name} (${formatFileSize(file.size)})`;
+                
+                for (let chunkIndex = 0; chunkIndex < totalChunks; chunkIndex++) {
+                    const chunk = file.slice(start, start + CHUNK_SIZE);
+                    uploadChunk(chunk, chunkIndex, file.name, totalChunks)
+                        .then(() => {
+                            uploadedChunks++;
+                            const percentage = Math.round((uploadedChunks / totalChunks) * 100);
+                            progressBar.style.width = percentage + '%';
+                            progressBar.textContent = percentage + '%';
+                            statusText.textContent = `Uploaded ${uploadedChunks} of ${totalChunks} chunks`;
+                            
+                            if (uploadedChunks === totalChunks) {
+                                mergeChunks(file.name, totalChunks);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error uploading chunk:', error);
+                            statusText.textContent = 'Error: ' + error.message;
+                        });
+                    
+                    start += CHUNK_SIZE;
+                }
+            }
+            
+            function uploadChunk(chunk, chunkIndex, fileName, totalChunks) {
+                const formData = new FormData();
+                formData.append('chunk', chunk);
+                formData.append('chunkIndex', chunkIndex);
+                formData.append('fileName', fileName);
+                formData.append('totalChunks', totalChunks);
+                
+                return fetch('/soppotool/api/ticket/upload-chunk', {
+                    method: 'POST',
+                    body: formData
+                }).then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                });
+            }
+            
+            function mergeChunks(fileName, totalChunks) {
+                statusText.textContent = 'Merging chunks...';
+                
+                fetch('/soppotool/api/ticket/merge-chunks', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        fileName: fileName,
+                        totalChunks: totalChunks
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(result => {
+                    statusText.textContent = 'Success: ' + result;
+                })
+                .catch(error => {
+                    console.error('Error merging chunks:', error);
+                    statusText.textContent = 'Error: ' + error.message;
+                });
+            }
+            
+            function formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                
+                const k = 1024;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PO Tool Notification</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    .email-container {
+      max-width: 700px;
+      margin: 20px auto;
+      background: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .header {
+      background: #eb043c;
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      margin: 0 0 10px 0;
+      font-weight: bold;
+    }
+
+    .header .subtitle {
+      font-size: 16px;
+      margin: 0;
+      opacity: 0.9;
+    }
+
+    .content {
+      padding: 30px;
+    }
+
+    .content p {
+      margin: 15px 0;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .highlight {
+      font-weight: bold;
+      color: #333;
+    }
+
+    .ticket-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 25px 0;
+      background: #fafafa;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .ticket-table th {
+      background-color: #f0f0f0;
+      color: #555;
+      padding: 8px 12px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 13px;
+      vertical-align: middle;
+    }
+
+    .ticket-table td {
+      padding: 8px 12px;
+      font-size: 13px;
+      vertical-align: middle;
+    }
+
+    .review-button {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    .review-button a {
+      display: inline-block;
+      background: #eb043c;
+      color: white;
+      padding: 15px 40px;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: bold;
+      font-size: 16px;
+      transition: transform 0.2s;
+    }
+
+    .review-button a:hover {
+      transform: translateY(-2px);
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #888;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="email-container">
+    <div class="header">
+      <h1> PO Tool Notification</h1>
+      <p class="subtitle">Purchase Requests Requiring Your Action</p>
+    </div>
+    <div class="content">
+      <p>Hello <span class="highlight" th:text="${recipient}">[Recipient's Name]</span>,</p>
+
+      <p>
+        The following requests have been received in your <span class="highlight">PO Tool Inbox</span> and need your
+        review:
+      </p>
+
+      <table class="ticket-table">
+        <tbody>
+          <tr>
+            <th>Request No</th>
+            <td th:text="${data.reqNo}">[Request Number]</td>
+          </tr>
+          <tr>
+            <th>Requested By</th>
+            <td th:text="${approvedBy + ' - ' + requestBy}">[Requested By]</td>
+          </tr>
+          <tr>
+            <th>Vendor</th>
+            <td th:text="${data.vendorName}">[Vendor]</td>
+          </tr>
+          <tr>
+            <th>Brand - Description</th>
+            <td style="vertical-align: middle;">
+              <ul th:if="${data.brand != null and !#lists.isEmpty(data.brand)}"
+                style="padding: 0; margin: 0; list-style: none;">
+                <li th:each="b : ${data.brand}"
+                  th:text="${#strings.defaultString(b.detailsBrand, 'N/A') + ' - ' + #strings.defaultString(b.poDescription, 'N/A')}"
+                  style="padding: 0; margin: 0;"></li>
+              </ul>
+              <span th:if="${data.brand == null or #lists.isEmpty(data.brand)}">No brand details available</span>
+            </td>
+          </tr>
+          <tr>
+            <th>Remarks</th>
+            <td th:text="${remarks}">[Remarks]</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="review-button">
+        <a href="https://marketingpotool.cavinkare.in/" title="Review Tickets"> Review Tickets</a>
+      </div>
+
+      <p>
+        Please log in to the PO tool and complete the necessary actions at your earliest convenience.
+      </p>
+      <p>Thank you for your prompt attention.</p>
+    </div>
+    <div class="footer">
+      <p>
+        This is a system-generated email. Please do not reply.<br>
+        For assistance, contact <span th:text="${supportContact}">[Support Email / Helpdesk]</span>
+      </p>
+    </div>
+  </div>
+</body>
+
+</html>

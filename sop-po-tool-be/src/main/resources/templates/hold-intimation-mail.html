@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket Hold Intimation</title>
+</head>
+<body>
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h2 style="color: #d9534f;">Ticket Hold Intimation</h2>
+        
+        <p>Dear <span th:text="${recipient}">User</span>,</p>
+        
+        <p>This is to inform you that the following ticket has been pending at <strong th:text="${stage}">Stage</strong> stage for more than 3 hours:</p>
+        
+        <div style="background-color: #f8f9fa; padding: 15px; border-left: 4px solid #d9534f; margin: 20px 0;">
+            <p><strong>Ticket Number:</strong> <span th:text="${data.reqNo}">REQ-001</span></p>
+            <p><strong>Vendor Name:</strong> <span th:text="${data.vendorName}">Vendor</span></p>
+            <p><strong>Total Base Value:</strong> ₹<span th:text="${data.totalBaseValue}">0</span></p>
+            <p><strong>Current Stage:</strong> <span th:text="${stage}">Stage</span></p>
+        </div>
+        
+        <p>Please take necessary action to process this ticket at the earliest.</p>
+        
+        <p>Thank you,<br/>
+        SOP PO Tool System</p>
+    </div>
+</body>
+</html>

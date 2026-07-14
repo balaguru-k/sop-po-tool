@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Template</title>
+    <!-- fonts  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com"crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"rel="stylesheet">
+    <style>
+         @font-face {
+            font-family: "Product";
+            src: url("cid:font");
+        }
+        body {
+            color: #333333;
+            margin: 0;
+            padding: 0;
+            font-family: "Product";
+            font-weight:500;
+            line-height: 20px;
+        }
+        table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-size:cover;
+            background-repeat: no-repeat;
+        }
+        .table__body{
+            background-color: #f7f9fc56;
+        }
+        .header {
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            height: 80px;
+        }
+        .content {
+            padding: 20px;
+            margin: 0px 20px;
+        }
+        .content .content_box{
+            background: #fff;
+            padding: 20px;
+        }
+        .footer {
+            padding: 0px 40px 40px 40px;
+            text-align: start;
+            font-size:14px;
+            padding-bottom: 40px;
+        }
+        .footer p {
+            margin: 0;
+        }
+        .btn{
+            background-color:#3CB043;
+            padding:12px 10px;
+            width: max-content;
+            border-radius: 6px;
+        }
+        .btn a{
+            color: #ffffff;
+            text-decoration: none;
+        }
+        @media(max-width:600px){
+            .btn{
+                background-color:red;
+            }
+        }
+    </style>
+</head>
+<body>
+    <table style="background: url(cid:backgroundImage);">
+        <tbody class="table__body">
+            <tr>
+                <td class="header">
+                    <a href="javascript:void(0)" target="_blank"  style="text-decoration: none;">
+                        <img src="cid:heplLogo" alt="logo" style="width: 100px;display: block;">
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td class="content">
+                    <div class="content_box">
+                        <p>Dear [Recipient's Name],</p>
+    
+                        <p>I hope this email finds you well. I wanted to touch base following our recent usability study conducted on [specific date]. Firstly, I'd like to express my gratitude for your participation and valuable insights throughout the process.</p>
+    
+                        <p>As we delve into the data collected, it's evident that your feedback has provided us with invaluable insights into the user experience with our current design. Your observations shed light on several pain points and areas for improvement that we are eager to address</p>
+    
+                        <p>Moving forward, we are committed to utilizing your feedback to enhance the usability and effectiveness of our product. Your input is instrumental in shaping the future direction of our design efforts, and we genuinely appreciate your contribution.</p>
+    
+                        <p>Please feel free to reach out if you have any further thoughts or suggestions. Your continued collaboration is invaluable to us as we strive to deliver an exceptional user experience.</p>
+    
+                        <p>Thank you once again for your time and valuable input.</p>
+    
+                        <p>Warm regards,</p>
+    
+                        <p>HEPL</p>
+
+                        <p class="btn">
+                            <a href="javascript:void(0)" >Call To Action</a>
+                        </p>
+                    </div>
+                    
+                </td>
+            </tr>
+            <tr>
+                <td class="footer">
+                    <p>This email was sent to <a href="mailto:gawas.sachin@gmail.com" style="color:#6875DE;">gawas.sachin@gmail.com.</a> If you’d rather not receive this kind of email, you can <a href="javascript:void(0)" style="color:#6875DE;">unsubscribe or manage your email preferences.</a></p>
+
+                    <p style="padding-top: 10px;">No.3, Sidco Industrial Estate,Semmandalam,Cuddalore – 607001</p>
+                    <div style="display: flex; justify-content: space-between;align-items: center;margin-top: 30px;">
+                        <div class="footer__one" >
+                            <a href="javascript:void(0)" target="_blank" style="text-decoration: none;">
+                                <img src="cid:heplLogo" alt="logo" style="width: 50px;">
+                            </a>
+                        </div>
+                        <div class="footer__two" style="display: flex; gap: 10px;">
+                            <a href="javascript:void(0)" target="_blank"><img src="cid:twitterImage" alt="twitter"  style="object-fit: contain; "></a>
+                            <a href="javascript:void(0)" target="_blank"><img src="cid:facebookImage" alt="facebook" style="object-fit: contain; "></a>
+                            <a href="javascript:void(0)" target="_blank"><img src="cid:linkedinImage" alt="linkedin" style="object-fit: contain; "></a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

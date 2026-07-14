@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Manual Email</title>
+</head>
+<body>
+    <div style="font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto;">
+        <div style="text-align: center; padding: 20px; border-bottom: 2px solid #ddd; margin-bottom: 20px;">
+            <img src="cid:logo" alt="Logo" style="height: 60px; margin-bottom: 10px;" />
+            <h1 style="color: #eb043c; margin: 0; font-size: 24px;" th:text="${header}">Marketing Po Tool</h1>
+        </div>
+        <div th:utext="${content}"></div>
+    </div>
+</body>
+</html>

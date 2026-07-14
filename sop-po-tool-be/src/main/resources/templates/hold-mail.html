@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ticket Hold Notification</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    .email-container {
+      max-width: 600px;
+      margin: 20px auto;
+      background: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .header {
+      text-align: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .header h1 {
+      font-size: 20px;
+      color: #0056b3;
+      margin: 0;
+    }
+
+    .content {
+      padding: 20px 0;
+    }
+
+    .content p {
+      margin: 10px 0;
+    }
+
+    .ticket-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    .ticket-table th,
+    .ticket-table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    .ticket-table th {
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #777;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="email-container">
+    <div class="header">
+      <h1>Ticket Hold Notification</h1>
+    </div>
+    <div class="content">
+      <p>Hello <span th:text="${recipient}">[Recipient's Name]</span>,</p>
+
+      <p>
+        The following ticket has been placed on hold at the <span th:text="${data.stage}">[Stage]</span>
+        stage:
+      </p>
+
+      <table class="ticket-table">
+        <thead>
+          <tr>
+            <th>Request Number</th>
+            <th>Hold By</th>
+            <th>Vendor</th>
+            <th>Brand - Description</th>
+            <th>Remarks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td th:text="${data.reqNo}">[Request Number]</td>
+            <td th:text="${holdBy +' - ' + data.stage}">[Hold By]</td>
+            <td th:text="${data.vendorName}">[Vendor]</td>
+            <td>
+              <ul th:if="${data.brand != null and !#lists.isEmpty(data.brand)}" style="padding-left: 15px; margin: 0;">
+                <li th:each="b : ${data.brand}"
+                  th:text="${#strings.defaultString(b.detailsBrand, 'N/A') + ' - ' + #strings.defaultString(b.poDescription, 'N/A')}">
+                </li>
+              </ul>
+              <span th:if="${data.brand == null or #lists.isEmpty(data.brand)}">No brand details available</span>
+            </td>
+            <td th:text="${remarks}">[Remarks]</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>
+        Please log in to the PO tool to review and take the necessary actions on this ticket.
+      </p>
+      <a href="https://marketingpotool.cavinkare.in/" title="link">Click Here</a>
+      <p>Thank you for your prompt attention to this matter.</p>
+    </div>
+    <div class="footer">
+      <p>
+        Please do not reply to this email. For assistance, contact the PO Tool Helpdesk.
+      </p>
+    </div>
+  </div>
+</body>
+
+</html>

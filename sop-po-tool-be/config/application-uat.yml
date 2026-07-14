@@ -1,0 +1,88 @@
+spring:
+  config:
+    activate:
+      on-profile: uat
+  data:
+    mongodb:
+        uri: mongodb://localhost:27017/uat_sop_po_tool
+        database: uat_sop_po_tool
+        auto-index-creation: true
+  mail:
+    host: sandbox.smtp.mailtrap.io
+    port: 2525
+    username: 462122e7094aa6
+    password: c7bd72c7ddd394
+    properties:
+      mail:
+        protocol: smtp
+        tls: true
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          ssl:
+            trust: sandbox.smtp.mailtrap.io
+        debug: true
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 40MB
+      max-request-size: 40MB
+
+server:
+  port: 8205
+  servlet:
+    context-path: /soppotool
+    
+path:
+  fileBasePath: /var/www/html/uat/sop_po_tool/soppotool_be/uploads
+  getPath: assets/uploads/
+
+datacapture:
+  app:
+    jwtSecret: "======================datacapture==========================="
+    jwtExpirationMs: 86400000
+    jwtCookieName: datacapture
+
+springdoc:
+  swagger-ui:
+    path: /ui
+
+storage:
+  location: documents
+  attachments: attachments
+  poCopy: poCopy
+  chunk : chunk
+  poFiles: poFiles
+  mailFiles: mailFiles
+  poScreeningFile: poScreeningFile
+  poMakerFile: poMakerFile
+  budgetFile: budgetFile
+  preApprovedFile: preApprovedFile
+  poApproverFile: poApproverFile
+
+resttemplate:
+  connection:
+    timeout: 10000
+  read:
+    timeout: 60000
+
+com:
+  custom:
+    reset-link: http://localhost:3000/#/resetpassword
+    isSignUp: true
+
+ebrief:
+  api:
+    url: https://ebriefdev.ckdigital.in/api/po_tool/briefs
+    username: brief_submission_user
+    password: 5iXOE4gfJ5ITSgT
+
+sap:
+  api:
+    balance-url: http://10.100.7.73:8002/sap/bc/zfmbdt?sap-client=500
+    vendor-url: http://10.100.7.73:8002/sap/bc/zckven_api?sap-client=500
+    order-url: http://13.126.161.240:8002/sap/bc/z_aufk?sap-client=500
+    financial-url: http://13.126.161.240:8002/sap/bc/zfmbdt?sap-client=500
+    fundcenter-url: http://13.126.161.240:8002/sap/bc/z_fmfctrt?sap-client=500
+    pofile-url: "http://13.234.60.33:8002/sap/bc/zpo_tool?sap-client=500"
