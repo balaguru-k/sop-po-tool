@@ -1,0 +1,6 @@
+{
+    "explorer.excludeGitIgnore": true,
+    "git-graph.commitDetailsView.location": "Inline",
+    "git-graph.contextMenuActionsVisibility": {},
+    "zencoder.enableRepoIndexing": true,
+}

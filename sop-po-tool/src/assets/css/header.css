@@ -1,0 +1,244 @@
+.custom-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 32px;
+    background-color: #f5f3f1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    font-family: 'Manrope-Regular', sans-serif;
+    height: 70px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.logo-box {
+    width: 40px;
+    height: 40px;
+    background-color: #d6002a;
+    /* CK Red */
+    color: white;
+    font-family: serif;
+    font-weight: bold;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-name {
+    font-family: 'Manrope-Bold', sans-serif;
+    font-size: 16px;
+    color: #222;
+    line-height: 1.2;
+}
+
+.brand-slogan {
+    font-size: 9px;
+    color: #888;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.header-center {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.nav-item {
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'GeneralSans-Medium', sans-serif !important;
+}
+
+.nav-item:hover {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.nav-item.active {
+    background-color: #fbe6ea;
+    /* Pinkish bg */
+    color: #d6002a;
+    font-weight: bold;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.notification-icon {
+    font-size: 20px;
+    color: #333;
+    cursor: pointer;
+    position: relative;
+    width: 36px;
+    height: 36px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notification-dot {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    width: 8px;
+    height: 8px;
+    background-color: #d6002a;
+    border: 2px solid #fff;
+    border-radius: 50%;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 18px 6px 6px;
+    background: #ffffff;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.user-profile:hover {
+    transform: scale(1.02) translateY(-2px);
+    box-shadow: 0 10px 20px -5px rgba(214, 0, 42, 0.15);
+}
+
+.user-avatar {
+    width: 38px;
+    height: 38px;
+    background: #d6002a;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 800;
+    box-shadow: 0 4px 10px rgba(214, 0, 42, 0.3);
+    border: 2px solid #fff;
+    transition: all 0.3s ease;
+}
+
+.user-profile:hover .user-avatar {
+    transform: scale(1.05);
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.4;
+    gap: 2px;
+}
+
+.user-name {
+    font-size: 14px;
+    font-weight: 800;
+    color: #1a1a1a;
+    letter-spacing: -0.3px;
+    line-height: 1.1;
+}
+
+.user-role {
+    font-size: 9.5px;
+    color: #d6002a;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 700;
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    width: fit-content;
+    box-shadow: none;
+    margin-top: 2px;
+    font-family: Arial, Helvetica, sans-serif !important;
+}
+
+.profile-chevron {
+    font-size: 10px;
+    color: #9ca3af;
+    margin-left: 4px;
+    transition: transform 0.2s ease;
+}
+
+.user-profile:hover .profile-chevron {
+    transform: translateY(2px);
+    color: #d6002a;
+}
+
+/* Ant Dropdown Customization - Minimalist Glass Design */
+.ant-dropdown-menu {
+    border-radius: 6px !important;
+    padding: 4px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06) !important;
+    border: 1px solid #f1f5f9 !important;
+    min-width: 140px !important;
+}
+
+.ant-dropdown-menu-item {
+    border-radius: 4px !important;
+    padding: 6px 10px !important;
+    margin-bottom: 1px !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    border-left: 2px solid transparent !important;
+}
+
+.ant-dropdown-menu-item:hover {
+    background-color: #fff1f2 !important;
+    border-left-color: #d6002a !important;
+}
+
+.ant-dropdown-menu-item b {
+    font-size: 12.5px;
+    font-weight: 500;
+    color: #334155;
+}
+
+.ant-dropdown-menu-item:hover b {
+    color: #d6002a;
+    font-weight: 600;
+}
+
+.ant-dropdown-menu-item a {
+    color: #d6002a !important;
+    font-weight: 700;
+    font-size: 12.5px;
+    text-decoration: none;
+}
+
+.ant-dropdown-menu-item-divider {
+    margin: 3px 0 !important;
+    background-color: #f8fafc !important;
+}
+
+/* Mobile responsiveness adjustments */
+@media (max-width: 992px) {
+    .header-center {
+        display: none;
+        /* Hide nav on mobile, presume standard sidebar/hamburger handles it */
+    }
+}

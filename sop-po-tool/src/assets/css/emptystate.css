@@ -1,0 +1,172 @@
+.empty-state-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 20px;
+}
+
+.empty-state-animation {
+  margin-bottom: 20px;
+}
+
+/* Chart Bars Animation */
+.chart-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  height: 120px;
+}
+
+.bar {
+  width: 30px;
+  border-radius: 8px 8px 0 0;
+  animation: barGrow 2s ease-in-out infinite;
+  opacity: 0.7;
+}
+
+.bar-1 {
+  animation-delay: 0s;
+  background: linear-gradient(180deg, #ffeaa7 0%, #fdcb6e 100%);
+}
+
+.bar-2 {
+  animation-delay: 0.2s;
+  background: linear-gradient(180deg, #00b894 0%, #00cec9 100%);
+}
+
+.bar-3 {
+  animation-delay: 0.4s;
+  background: linear-gradient(180deg, #e17055 0%, #fd79a8 100%);
+}
+
+.bar-4 {
+  animation-delay: 0.6s;
+  background: linear-gradient(180deg, #636e72 0%, #b2bec3 100%);
+}
+
+@keyframes barGrow {
+  0%, 100% {
+    height: 30px;
+    opacity: 0.5;
+  }
+  50% {
+    height: 100px;
+    opacity: 0.9;
+  }
+}
+
+/* Doughnut Ring Animation */
+.doughnut-ring {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 15px solid #f0f0f0;
+  position: relative;
+  animation: rotate 3s linear infinite;
+}
+
+.ring-segment {
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 15px solid transparent;
+  border-top-color: #ffeaa7;
+  border-right-color: #00b894;
+  border-bottom-color: #e17055;
+  border-left-color: #636e72;
+  animation: segmentRotate 2s ease-in-out infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes segmentRotate {
+  0%, 100% {
+    transform: rotate(0deg);
+    opacity: 0.6;
+  }
+  50% {
+    transform: rotate(180deg);
+    opacity: 1;
+  }
+}
+
+/* Polar Circles Animation */
+.polar-circles {
+  position: relative;
+  width: 150px;
+  height: 150px;
+}
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  animation: polarPulse 2.5s ease-in-out infinite;
+  border: 3px solid;
+}
+
+.circle-1 {
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, rgba(255, 234, 167, 0.2) 0%, rgba(253, 203, 110, 0.1) 70%, transparent 100%);
+  border-color: rgba(253, 203, 110, 0.6);
+  animation-delay: 0s;
+}
+
+.circle-2 {
+  width: 100px;
+  height: 100px;
+  top: 25px;
+  left: 25px;
+  background: radial-gradient(circle, rgba(0, 184, 148, 0.25) 0%, rgba(0, 206, 201, 0.12) 70%, transparent 100%);
+  border-color: rgba(0, 206, 201, 0.7);
+  animation-delay: 0.4s;
+}
+
+.circle-3 {
+  width: 50px;
+  height: 50px;
+  top: 50px;
+  left: 50px;
+  background: radial-gradient(circle, rgba(225, 112, 85, 0.3) 0%, rgba(253, 121, 168, 0.15) 70%, transparent 100%);
+  border-color: rgba(253, 121, 168, 0.8);
+  animation-delay: 0.8s;
+}
+
+@keyframes polarPulse {
+  0%, 100% {
+    transform: scale(0.85);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+/* Text Styles */
+.empty-state-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: #4a5568;
+  margin: 0 0 8px 0;
+  font-family: 'DMSans-Medium', sans-serif;
+}
+
+.empty-state-subtext {
+  font-size: 13px;
+  color: #a0aec0;
+  margin: 0;
+  font-family: 'DMSans-Regular', sans-serif;
+}

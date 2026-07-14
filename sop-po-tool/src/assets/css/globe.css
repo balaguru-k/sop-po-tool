@@ -1,0 +1,78 @@
+.page-containers {
+    width: 100% !important;
+    height: 90vh !important;
+    display: flex !important ;
+    justify-content: center !important;
+    align-items:center !important ;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+.globe-container {
+    margin-top: 6px !important;
+    position: relative !important;
+}
+
+.globe-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+}
+
+ span.globe-span{
+    font-weight: bold;
+    text-shadow: 0 0 5px #ffffff;
+    padding: .2em .6em !important;
+    border-radius: 2px;
+    font-size: 2em;
+}
+
+/* canvas.canvas-style{
+    cursor: pointer !important;
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    -khtml-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    -webkit-tap-highlight-color: rgba(198, 25, 25, 0.936) !important;
+} */
+
+svg.map-color-style{
+    position: fixed !important;
+    top: 0 !important;
+    visibility: hidden !important;
+}
+
+
+.globe-style-title{
+    color: #153443;
+    font-size:50px;
+}
+
+@media (min-width: 320px) and (max-width: 768px) {
+    .globe-style-title{
+        font-size: 20px;
+        padding-top:20px;
+    }
+    .page-containers { 
+        height: 36vh !important;
+    }
+
+}
+@media (min-width: 768px) and (max-width: 968px) {
+    .page-containers { 
+        height: 70vh !important;
+    }
+
+}
+
+
+
