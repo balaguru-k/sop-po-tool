@@ -1,28 +1,29 @@
+# ---------- Build Stage ----------
 FROM maven:3.9.9-eclipse-temurin-17 AS build
+
 WORKDIR /workspace/app
 
-COPY .mvn/ .mvn/
-COPY mvnw pom.xml ./
-RUN chmod +x mvnw && ./mvnw -q -DskipTests dependency:go-offline
-
+COPY pom.xml .
 COPY src ./src
 COPY config ./config
 COPY deploy.sh ./deploy.sh
 
-RUN ./mvnw -q -DskipTests package
+RUN mvn clean package -DskipTests
 
+# ---------- Runtime Stage ----------
 FROM eclipse-temurin:17-jre
+
 WORKDIR /app
 
-COPY --from=build /workspace/app/target/*.jar /app/app.jar
-COPY --from=build /workspace/app/config /app/config
+COPY --from=build /workspace/app/target/*.jar app.jar
+COPY --from=build /workspace/app/config ./config
 
 EXPOSE 8404
 
-ENV SPRING_PROFILES_ACTIVE=dev \
-    SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/sop_po_tool \
-    PATH_FILEBASEPATH=/app/uploads
+ENV SPRING_PROFILES_ACTIVE=dev
+ENV SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/sop_po_tool
+ENV PATH_FILEBASEPATH=/app/uploads
 
 RUN mkdir -p /app/uploads
 
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
