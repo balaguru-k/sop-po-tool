@@ -16,7 +16,6 @@ COPY --from=build /workspace/app/config ./config
 RUN mkdir -p /app/uploads
 
 ENV SPRING_PROFILES_ACTIVE=dev
-ENV SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/sop_po_tool
 ENV PATH_FILEBASEPATH=/app/uploads
 
 EXPOSE 8404
