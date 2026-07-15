@@ -132,6 +132,7 @@
 					</excludes>
 				</configuration>
 			</plugin>
+<!--
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
@@ -187,8 +188,9 @@
             </plugins>
         </build>
     </profile>
- 
+ -->
     <!-- Profile for Linux -->
+<!--
     <profile>
         <id>linux</id>
         <activation>
@@ -217,5 +219,5 @@
         </build>
     </profile>
     </profiles>
-
+-->
 </project>
