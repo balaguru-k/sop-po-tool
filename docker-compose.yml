@@ -4,6 +4,7 @@ backend:
     dockerfile: Dockerfile
 
   container_name: sop-po-backend
+  restart: unless-stopped
 
   environment:
     SPRING_PROFILES_ACTIVE: dev
