@@ -1,21 +1,20 @@
-version: "3.8"
+services:
+  backend:
+    build:
+      context: ./sop-po-tool-be
+      dockerfile: Dockerfile
 
-backend:
-  build:
-    context: ./sop-po-tool-be
-    dockerfile: Dockerfile
+    container_name: sop-po-backend
+    restart: unless-stopped
 
-  container_name: sop-po-backend
-  restart: unless-stopped
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      SPRING_DATA_MONGODB_URI: mongodb://host.docker.internal:27017/sop_po_tool
+      SERVER_PORT: 8404
+      PATH_FILEBASEPATH: /app/uploads
 
-  environment:
-    SPRING_PROFILES_ACTIVE: dev
-    SPRING_DATA_MONGODB_URI: mongodb://host.docker.internal:27017/sop_po_tool
-    SERVER_PORT: 8404
-    PATH_FILEBASEPATH: /app/uploads
-
-  ports:
-    - "8404:8404"
+    ports:
+      - "8404:8404"
 
     volumes:
       - backend-uploads:/app/uploads
@@ -26,7 +25,6 @@ backend:
       dockerfile: Dockerfile
 
     container_name: sop-po-frontend
-
     restart: unless-stopped
 
     depends_on:
@@ -34,7 +32,6 @@ backend:
 
     ports:
       - "3000:80"
-
 
 volumes:
   backend-uploads:
