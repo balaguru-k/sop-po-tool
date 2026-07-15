@@ -1,3 +1,5 @@
+version: "3.8"
+
 backend:
   build:
     context: ./sop-po-tool-be
