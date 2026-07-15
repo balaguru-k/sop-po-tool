@@ -35,5 +35,4 @@ backend:
 
 
 volumes:
-  mongo-data:
   backend-uploads:
