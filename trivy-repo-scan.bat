@@ -13,6 +13,9 @@ docker run --rm ^
   --scanners vuln,misconfig,secret ^
   --severity HIGH,CRITICAL ^
   --ignore-unfixed ^
+  --offline-scan ^
+  --skip-dirs "sop-po-tool/build,sop-po-tool/node_modules,sop-po-tool-be/target" ^
+  --skip-files "*.map" ^
   --exit-code 0 ^
   --format table ^
   /src
