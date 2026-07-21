@@ -4,7 +4,7 @@ REM Usage: trivy-image-scan.bat <image-name:tag>
 
 SET IMAGE_NAME=%~1
 IF "%IMAGE_NAME%"=="" (
-    echo Error: No image name provided.
+    echo [ERROR] No image name provided.
     exit /b 1
 )
 
