@@ -1,6 +1,5 @@
 @echo off
 REM trivy-image-scan.bat
-REM Usage: trivy-image-scan.bat <image-name:tag>
 
 SET IMAGE_NAME=%~1
 IF "%IMAGE_NAME%"=="" (
@@ -8,9 +7,12 @@ IF "%IMAGE_NAME%"=="" (
     exit /b 1
 )
 
-echo === Running Trivy Scan for: %IMAGE_NAME% ===
+echo === Running Trivy Scan for: %IMAGE_NAME% via Docker ===
 
-trivy image ^
+docker run --rm ^
+  -v /var/run/docker.sock:/var/run/docker.sock ^
+  -v "%LOCALAPPDATA%\Trivy\Cache":/root/.cache ^
+  aquasec/trivy image ^
   --severity HIGH,CRITICAL ^
   --ignore-unfixed ^
   --exit-code 1 ^
