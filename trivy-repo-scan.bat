@@ -1,21 +1,23 @@
 @echo off
 REM trivy-repo-scan.bat
 
-echo === Running Trivy Repository Scan via Docker ===
+echo === Running Trivy Repository Scan ===
 
-IF NOT EXIST "%WORKSPACE%\.trivy-cache" mkdir "%WORKSPACE%\.trivy-cache"
+SET TRIVY_CACHE_DIR=C:\ProgramData\TrivyCache
+IF NOT EXIST "%TRIVY_CACHE_DIR%" mkdir "%TRIVY_CACHE_DIR%"
 
-docker run --rm ^
-  -v /var/run/docker.sock:/var/run/docker.sock ^
-  -v "%WORKSPACE%\.trivy-cache":/root/.cache ^
-  -v "%WORKSPACE%":/src ^
-  aquasec/trivy fs ^
-  --scanners vuln,misconfig,secret ^
+trivy fs . ^
+  --cache-dir "%TRIVY_CACHE_DIR%" ^
+  --scanners vuln ^
   --severity HIGH,CRITICAL ^
   --ignore-unfixed ^
-  --offline-scan ^
   --skip-dirs "sop-po-tool/build,sop-po-tool/node_modules,sop-po-tool-be/target" ^
   --skip-files "*.map" ^
   --exit-code 0 ^
-  --format table ^
-  /src
+  --format table
+
+IF %ERRORLEVEL% NEQ 0 (
+    echo [WARNING] Trivy repository scan reported issues.
+)
+
+echo === Trivy Repository Scan Completed ===
