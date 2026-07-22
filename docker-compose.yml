@@ -3,7 +3,7 @@ services:
     build:
       context: ./sop-po-tool-be
       dockerfile: Dockerfile
-
+    image: sop-po-backend:latest
     container_name: sop-po-backend
     restart: unless-stopped
 
@@ -23,7 +23,7 @@ services:
     build:
       context: ./sop-po-tool
       dockerfile: Dockerfile
-
+    image: sop-po-frontend:latest
     container_name: sop-po-frontend
     restart: unless-stopped
 
