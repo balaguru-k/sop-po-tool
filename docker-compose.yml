@@ -6,16 +6,15 @@ services:
     image: sop-po-backend:latest
     container_name: sop-po-backend
     restart: unless-stopped
-
     environment:
       SPRING_PROFILES_ACTIVE: dev
       SPRING_DATA_MONGODB_URI: mongodb://host.docker.internal:27017/sop_po_tool
       SERVER_PORT: 8404
       PATH_FILEBASEPATH: /app/uploads
-
     ports:
       - "8404:8404"
-
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - backend-uploads:/app/uploads
 
@@ -26,10 +25,8 @@ services:
     image: sop-po-frontend:latest
     container_name: sop-po-frontend
     restart: unless-stopped
-
     depends_on:
       - backend
-
     ports:
       - "3000:80"
 
