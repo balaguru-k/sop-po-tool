@@ -6,7 +6,7 @@ echo === Running Trivy Repository Scan via Docker ===
 SET TRIVY_CACHE=C:\ProgramData\TrivyCache
 IF NOT EXIST "%TRIVY_CACHE%" mkdir "%TRIVY_CACHE%"
 
-SET MAVEN_CACHE=%USERPROFILE%\.m2
+SET MAVEN_CACHE=C:\ProgramData\MavenCache
 IF NOT EXIST "%MAVEN_CACHE%" mkdir "%MAVEN_CACHE%"
 
 docker run --rm ^
