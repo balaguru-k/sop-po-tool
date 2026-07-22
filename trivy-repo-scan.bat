@@ -3,11 +3,11 @@ REM trivy-repo-scan.bat
 
 echo === Running Trivy Repository Scan via Docker ===
 
-SET LOCAL_CACHE=%LOCALAPPDATA%\Trivy\Cache
-IF NOT EXIST "%LOCAL_CACHE%" mkdir "%LOCAL_CACHE%"
+SET TRIVY_CACHE=C:\ProgramData\TrivyCache
+IF NOT EXIST "%TRIVY_CACHE%" mkdir "%TRIVY_CACHE%"
 
 docker run --rm ^
-  -v "%LOCAL_CACHE%":/root/.cache ^
+  -v "%TRIVY_CACHE%":/root/.cache ^
   -v "%CD%":/src ^
   aquasec/trivy fs ^
   --scanners vuln ^
