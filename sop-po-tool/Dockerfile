@@ -2,9 +2,9 @@
 FROM node:20-alpine AS build
 WORKDIR /app
 
-# Install dependencies
+# Install dependencies using clean install & legacy peer deps to avoid conflicts
 COPY package.json package-lock.json ./
-RUN npm install 
+RUN npm ci --legacy-peer-deps || RUN npm install --legacy-peer-deps
 
 # Copy app source and build
 COPY . .
@@ -14,6 +14,5 @@ RUN npm run build
 FROM nginx:stable-alpine
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Optional: add nginx config if needed
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
