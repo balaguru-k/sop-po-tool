@@ -9,13 +9,13 @@ IF "%BACKEND_IMAGE%"=="" (
     exit /b 1
 )
 
-SET LOCAL_CACHE=%LOCALAPPDATA%\Trivy\Cache
-IF NOT EXIST "%LOCAL_CACHE%" mkdir "%LOCAL_CACHE%"
+SET TRIVY_CACHE=C:\ProgramData\TrivyCache
+IF NOT EXIST "%TRIVY_CACHE%" mkdir "%TRIVY_CACHE%"
 
 echo === Running Trivy Scan for Backend: %BACKEND_IMAGE% ===
 docker run --rm ^
   -v /var/run/docker.sock:/var/run/docker.sock ^
-  -v "%LOCAL_CACHE%":/root/.cache ^
+  -v "%TRIVY_CACHE%":/root/.cache ^
   aquasec/trivy image ^
   --scanners vuln ^
   --severity CRITICAL ^
@@ -32,7 +32,7 @@ IF NOT "%FRONTEND_IMAGE%"=="" (
     echo === Running Trivy Scan for Frontend: %FRONTEND_IMAGE% ===
     docker run --rm ^
       -v /var/run/docker.sock:/var/run/docker.sock ^
-      -v "%LOCAL_CACHE%":/root/.cache ^
+      -v "%TRIVY_CACHE%":/root/.cache ^
       aquasec/trivy image ^
       --scanners vuln ^
       --severity CRITICAL ^
