@@ -6,13 +6,18 @@ echo === Running Trivy Repository Scan via Docker ===
 SET TRIVY_CACHE=C:\ProgramData\TrivyCache
 IF NOT EXIST "%TRIVY_CACHE%" mkdir "%TRIVY_CACHE%"
 
+SET MAVEN_CACHE=%USERPROFILE%\.m2
+IF NOT EXIST "%MAVEN_CACHE%" mkdir "%MAVEN_CACHE%"
+
 docker run --rm ^
   -v "%TRIVY_CACHE%":/root/.cache ^
+  -v "%MAVEN_CACHE%":/root/.m2 ^
   -v "%CD%":/src ^
   aquasec/trivy fs ^
   --scanners vuln ^
   --severity HIGH,CRITICAL ^
   --ignore-unfixed ^
+  --offline-scan ^
   --skip-dirs "sop-po-tool/build,sop-po-tool/node_modules,sop-po-tool-be/target" ^
   --skip-files "*.map" ^
   --exit-code 0 ^
