@@ -1,5 +1,5 @@
 services:
-  backend:
+ backend:
     build:
       context: ./sop-po-tool-be
       dockerfile: Dockerfile
@@ -11,13 +11,18 @@ services:
       SPRING_DATA_MONGODB_URI: mongodb://host.docker.internal:27017/sop_po_tool
       SERVER_PORT: 8404
       PATH_FILEBASEPATH: /app/uploads
+      # Mail environment variables:
+      SPRING_MAIL_HOST: smtp.gmail.com
+      SPRING_MAIL_PORT: 587
+      SPRING_MAIL_USERNAME: your-email@gmail.com
+      SPRING_MAIL_PASSWORD: your-app-password
     ports:
       - "8404:8404"
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
       - backend-uploads:/app/uploads
-
+      
   frontend:
     build:
       context: ./sop-po-tool
