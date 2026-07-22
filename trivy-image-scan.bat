@@ -7,16 +7,11 @@ IF "%IMAGE_NAME%"=="" (
     exit /b 1
 )
 
-echo === Running Trivy Scan for: %IMAGE_NAME% via Docker ===
+echo === Running Trivy Image Scan for: %IMAGE_NAME% ===
 
-IF NOT EXIST "%WORKSPACE%\.trivy-cache" mkdir "%WORKSPACE%\.trivy-cache"
+trivy image --severity CRITICAL --ignore-unfixed --exit-code 1 %IMAGE_NAME%
 
-docker run --rm ^
-  -v /var/run/docker.sock:/var/run/docker.sock ^
-  -v "%WORKSPACE%\.trivy-cache":/root/.cache ^
-  aquasec/trivy image ^
-  --severity HIGH,CRITICAL ^
-  --ignore-unfixed ^
-  --exit-code 1 ^
-  --format table ^
-  "%IMAGE_NAME%"
+IF %ERRORLEVEL% NEQ 0 (
+    echo [ERROR] Trivy image scan failed for %IMAGE_NAME%!
+    exit /b %ERRORLEVEL%
+)
